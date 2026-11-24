@@ -1,0 +1,10 @@
+/404 /404.html 404
+/contact /index.html 200
+/privacy /index.html 200
+/dashboard /index.html 200
+/coach /index.html 200
+/workouts /index.html 200
+/weight-log /index.html 200
+/profile /index.html 200
+/home /dashboard 301
+/weight /weight-log 301

@@ -1,0 +1,6 @@
+name = "fuolingo"
+compatibility_date = "2026-11-20"
+pages_build_output_dir = "dist"
+
+[vars]
+GEMINI_MODEL = "gemini-2.0-flash"

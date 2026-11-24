@@ -1,0 +1,34 @@
+substitutions:
+  _SERVICE_NAME: fuolingo
+  _REGION: us-central1
+  _REPOSITORY: fuolingo
+  _IMAGE: us-central1-docker.pkg.dev/$PROJECT_ID/$_REPOSITORY/$_SERVICE_NAME:$COMMIT_SHA
+
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - $_IMAGE
+      - --build-arg
+      - VITE_SUPABASE_URL=${_VITE_SUPABASE_URL}
+      - --build-arg
+      - VITE_SUPABASE_ANON_KEY=${_VITE_SUPABASE_ANON_KEY}
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args: [push, $_IMAGE]
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - $_SERVICE_NAME
+      - --image=$_IMAGE
+      - --region=$_REGION
+      - --platform=managed
+      - --allow-unauthenticated
+      - --port=8080
+      - --set-env-vars=APP_ORIGIN=${_APP_ORIGIN},PUBLIC_APP_URL=${_APP_ORIGIN},GEMINI_MODEL=${_GEMINI_MODEL}
+      - --set-secrets=SUPABASE_SERVICE_ROLE_KEY=fuolingo-supabase-service-role:latest,GEMINI_API_KEY=fuolingo-gemini-api-key:latest,RAZORPAY_KEY_ID=fuolingo-razorpay-key-id:latest,RAZORPAY_KEY_SECRET=fuolingo-razorpay-key-secret:latest,RAZORPAY_WEBHOOK_SECRET=fuolingo-razorpay-webhook:latest
+images:
+  - $_IMAGE
