@@ -1,4 +1,4 @@
-import { hmacHex, json, options, RAZORPAY_PLANS, supabaseRest } from '../../../_lib/fuolingo.js';
+import { hmacHex, json, options, RAZORPAY_PLANS, supabaseRest } from '../../_lib/fuolingo.js';
 
 export async function onRequest(context) {
   const { request, env } = context;

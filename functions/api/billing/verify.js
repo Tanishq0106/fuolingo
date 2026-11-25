@@ -1,4 +1,4 @@
-import { authUser, hmacHex, json, options, supabaseRest, RAZORPAY_PLANS } from '../../../_lib/fuolingo.js';
+import { authUser, hmacHex, json, options, supabaseRest, RAZORPAY_PLANS } from '../../_lib/fuolingo.js';
 
 export async function onRequest(context) {
   const { request, env } = context;
