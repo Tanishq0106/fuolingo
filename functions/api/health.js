@@ -1,4 +1,4 @@
-import { json, options } from '../../_lib/fuolingo.js';
+import { json, options } from '../_lib/fuolingo.js';
 
 export async function onRequest(context) {
   const { request, env } = context;
